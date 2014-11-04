@@ -1,0 +1,68 @@
+#Grails Container
+
+This docker image includes Oracle Java 7 and Grails 2.4.4 for use in developing Grails applications (with the Grails cli as the endpoint).
+
+## Usage
+
+### Default Behavior
+By defaut, running this image without any command will run `grails -version` in the /app directory. Thus, you should mount your project in /app. For example, a more interesting command would be test-running your app.
+
+```bash
+# For files on the dockerhost
+docker run --rm -v /path/to/your/project:/app:rw -p 80:8080 --name grails niaquinto/grails grails run-app
+
+# For a data container
+docker run --rm --link data-container-name:data -p 80:8080 --name grails niaquinto/grails grails run-app
+```
+
+### Versatility
+Of course, you can use any command here, and take notice that `grails` is the entrypoint. So, to create an application, run the following:
+
+```bash
+docker run --rm -v /path/to/dir:/app:rw --name grails niaquinto/grails create-app helloworld
+```
+
+### Interactive Mode
+A nice feature of Grails is its interactive mode. Also useful if you find yourself starting a grails container frequently (and waiting for everything to load), you can set the docker switches -i and -t and the grails switch `--interactive` (see example). This overrides the default CMD (`-version`) if you didn't change it.
+
+```bash
+docker run -it --rm -v /path/to/project:/app:rw --name grails niaquinto/grails --interactive
+```
+
+### Building On This Container
+
+Obviously, `grails -version` is not a very interesting command. So, when want to customize or get annoyed with changing your project's user and group, you can build off of this image and tweak all the settings, install more packages, etc:
+
+```bash
+FROM niaquinto/grails
+MAINTAINER your-name-here <email@you.com>
+
+# In case someone loses the Dockerfile
+RUN rm -rf /etc/Dockerfile
+ADD Dockerfile /etc/Dockerfile
+
+# Add your desired user and group
+RUN groupadd your-group-name
+RUN useradd -s /bin/bash -m -d /app -g your-group-name your-user-name
+
+# Set your desired user as default
+USER your-user-name
+
+# Whatever default behavior you want
+ENTRYPOINT ["grails"]
+CMD ["run-app"]
+```
+
+## Get the Image
+
+To build this image yourself, run...
+ 
+```bash
+docker build github.com/niaquinto/docker-grails
+```
+
+Or, you can pull the image from the central docker repository by using... 
+
+```bash
+docker pull niaquinto/grails
+```
