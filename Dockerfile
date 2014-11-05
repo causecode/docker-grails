@@ -10,9 +10,10 @@ WORKDIR /usr/lib/jvm
 RUN wget http://dist.springframework.org.s3.amazonaws.com/release/GRAILS/grails-2.4.4.zip && \
     unzip grails-2.4.4.zip && \
     rm -rf grails-2.4.4.zip && \
-    ln -s grails-2.4.4 grails && \
-    GRAILS_HOME /usr/lib/jvm/grails && \
-    PATH $GRAILS_HOME/bin:$PATH
+    ln -s grails-2.4.4 grails
+
+ENV GRAILS_HOME /usr/lib/jvm/grails
+ENV PATH $GRAILS_HOME/bin:$PATH
 
 # Create App Directory
 RUN mkdir /app

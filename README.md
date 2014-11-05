@@ -23,7 +23,7 @@ docker run --rm -v /path/to/dir:/app:rw --name grails niaquinto/grails create-ap
 ```
 
 ### Interactive Mode
-A nice feature of Grails is its interactive mode. Also useful if you find yourself starting a grails container frequently (and waiting for everything to load), you can set the docker switches -i and -t and the grails switch `--interactive` (see example). This overrides the default CMD (`-version`) if you didn't change it.
+Downloading a whole bunch of things each time you run the container is a pain -- not to mention a huuge bandwidth sink ( for everyone else stuck in 1995 internet with me ). A nice feature of Grails is its interactive mode. Also useful if you find yourself starting a grails container frequently, you can set the docker switches -i and -t and the grails switch `--interactive` (see example). This overrides the default CMD (`-version`) if you didn't change it.
 
 ```bash
 docker run -it --rm -v /path/to/project:/app:rw --name grails niaquinto/grails --interactive
