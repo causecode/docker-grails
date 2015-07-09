@@ -1,6 +1,6 @@
 #Grails Container
 
-This docker image includes Oracle Java 7 and Grails 2.4.4 for use in developing Grails applications (with the Grails cli as the endpoint).
+This docker image includes OpenJDK 8 and Grails 3.0.1 for use in developing Grails applications (with the Grails cli as the endpoint).
 
 ## Usage
 
