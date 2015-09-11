@@ -6,7 +6,7 @@ RUN rm -rf /etc/Dockerfile
 ADD Dockerfile /etc/Dockerfile
 
 # Install Grails
-ENV GRAILS_VERSION 3.0.1
+ENV GRAILS_VERSION 3.0.6
 WORKDIR /usr/lib/jvm
 RUN wget https://github.com/grails/grails-core/releases/download/v${GRAILS_VERSION}/grails-${GRAILS_VERSION}.zip && \
     unzip grails-${GRAILS_VERSION}.zip && \
